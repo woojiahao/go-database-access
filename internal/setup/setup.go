@@ -8,8 +8,9 @@ import (
 )
 
 type customer struct {
-	id   string
-	name string
+	id      string
+	name    string
+	allergy sql.NullString
 }
 
 func Setup() {
@@ -25,7 +26,8 @@ func Setup() {
 	createQuery := `
 	CREATE TABLE IF NOT EXISTS customer (
 	    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-	    name TEXT NOT NULL
+	    name TEXT NOT NULL,
+	    allergy TEXT
 	);
 
 	CREATE TABLE IF NOT EXISTS "order" (
@@ -33,7 +35,7 @@ func Setup() {
 	    food TEXT NOT NULL,
 	    quantity INTEGER NOT NULL,
 	    timestamp TIMESTAMP NOT NULL DEFAULT now(),
-	    customer_id UUID,
+	    customer_id UUID NOT NULL,
 	    FOREIGN KEY(customer_id) REFERENCES customer(id)
 	);
 	`
@@ -44,17 +46,17 @@ func Setup() {
 
 	var customers []customer
 	createCustomerQuery := `
-	INSERT INTO customer(name) 
+	INSERT INTO customer(name, allergy) 
 	VALUES
-	    ('John Doe'), 
-	    ('Mary Anne'), 
-	    ('Jason Borne') 
+	    ('John Doe', null), 
+	    ('Mary Anne', 'Cheese'), 
+	    ('Jason Borne', null) 
 	RETURNING *;
 	`
 	rows, err := db.QueryContext(context.TODO(), createCustomerQuery)
 	for rows.Next() {
 		var c customer
-		rows.Scan(&c.id, &c.name)
+		rows.Scan(&c.id, &c.name, &c.allergy)
 		customers = append(customers, c)
 	}
 
