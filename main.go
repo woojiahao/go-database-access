@@ -48,7 +48,7 @@ func main() {
 		setup.Setup()
 	case "example":
 		if len(args) < 2 {
-			log.Fatalln("Include the example to run. Examples available: connect, single, multi")
+			log.Fatalln("Include the example to run. Examples available: connect, single, multi, parameterised, null, insert, transaction, struct, return, prepared, conn, timeout")
 		}
 		example := strings.ToLower(args[2])
 		dispatchExample(example)
