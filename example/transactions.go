@@ -3,13 +3,12 @@ package example
 import (
 	"context"
 	"database/sql"
-	_ "github.com/lib/pq"
 	"log"
 )
 
 func Transaction() {
 	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)
 	}

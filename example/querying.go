@@ -3,13 +3,12 @@ package example
 import (
 	"context"
 	"database/sql"
-	_ "github.com/lib/pq"
 	"log"
 )
 
 func SingleRowQuery() {
 	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)
 	}
@@ -29,7 +28,7 @@ func SingleRowQuery() {
 
 func MultiRowQuery() {
 	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)
 	}
@@ -54,7 +53,7 @@ func MultiRowQuery() {
 
 func ParameterisedQuery(target string) {
 	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)
 	}
@@ -74,7 +73,7 @@ func ParameterisedQuery(target string) {
 
 func NullTypeQuery() {
 	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
-	db, err := sql.Open("postgres", connStr)
+	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)
 	}

@@ -30,8 +30,6 @@ func dispatchExample(eg string) {
 		example.Returning()
 	case "prepared":
 		example.Prepared()
-	case "conn":
-		example.Connection()
 	case "timeout":
 		example.Timeout()
 	}

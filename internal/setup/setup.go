@@ -3,7 +3,7 @@ package setup
 import (
 	"context"
 	"database/sql"
-	_ "github.com/lib/pq"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"log"
 )
 
@@ -14,7 +14,7 @@ type customer struct {
 }
 
 func Setup() {
-	db, err := sql.Open("postgres", "postgres://postgres:root@localhost:5432/gba?sslmode=disable")
+	db, err := sql.Open("pgx", "postgres://postgres:root@localhost:5432/gba?sslmode=disable")
 	if err != nil {
 		log.Fatalf("Failed to connect to database because %s", err)
 	}
