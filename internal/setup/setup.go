@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"log"
+	"woojiahao.com/gda/internal/utility"
 )
 
 type customer struct {
@@ -14,7 +15,7 @@ type customer struct {
 }
 
 func Setup() {
-	db, err := sql.Open("pgx", "postgres://postgres:root@localhost:5432/gba?sslmode=disable")
+	db, err := sql.Open("pgx", utility.ConnectionString())
 	if err != nil {
 		log.Fatalf("Failed to connect to database because %s", err)
 	}

@@ -4,10 +4,11 @@ import (
 	"context"
 	"database/sql"
 	"log"
+	"woojiahao.com/gda/internal/utility"
 )
 
 func SingleRowQuery() {
-	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
+	connStr := utility.ConnectionString()
 	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)
@@ -27,7 +28,7 @@ func SingleRowQuery() {
 }
 
 func MultiRowQuery() {
-	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
+	connStr := utility.ConnectionString()
 	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)
@@ -52,7 +53,7 @@ func MultiRowQuery() {
 }
 
 func ParameterisedQuery(target string) {
-	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
+	connStr := utility.ConnectionString()
 	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)
@@ -72,7 +73,7 @@ func ParameterisedQuery(target string) {
 }
 
 func NullTypeQuery() {
-	connStr := "postgres://postgres:root@localhost:5432/gba?sslmode=disable"
+	connStr := utility.ConnectionString()
 	db, err := sql.Open("pgx", connStr)
 	if err != nil {
 		log.Fatalf("Unable to connect to database because %s", err)

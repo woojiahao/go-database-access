@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/joho/godotenv"
 	"log"
 	"os"
 	"strings"
@@ -36,6 +37,11 @@ func dispatchExample(eg string) {
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Unable to load .env")
+	}
+
 	args := os.Args
 	if len(args) < 1 {
 		log.Fatalln("Include the command to run. Commands available: setup, example")
